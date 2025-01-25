@@ -76,6 +76,8 @@
 // 	return 0;
 // }
 
+//-----------------------------------------------of-----------------------------------
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -89,6 +91,29 @@ typedef struct s_stack
 void exit_error(char *err)
 {
 	
+}
+
+int *bable_sort(int *arr, int count)
+{
+	int i = 0;
+	int j = 0;
+	int tmp = 0;
+	while (i < count)
+	{
+		j = 0;
+		while (j < count)
+		{
+			if (arr[i] < arr[j])
+			{
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+	return arr;
 }
 
 int check_argv(char **av)
@@ -124,7 +149,6 @@ int check_dup(int *arr, int count)
 				return 0;
 			j++;
 		}
-		
 		i++;
 	}
 	return 1;
@@ -133,8 +157,10 @@ int check_dup(int *arr, int count)
 t_stack *fill_a(int ac, char **argv)
 {
 	int i = ac - 1;
-	// argv++;
-	if (!check_argv(argv)) return NULL;
+	if (!check_argv(argv)){
+		printf("not only int");
+		exit(1);
+	}
 	t_stack *stack = malloc(sizeof(t_stack));
 	if (!stack)
 		return NULL;
@@ -148,27 +174,49 @@ t_stack *fill_a(int ac, char **argv)
 		stack->stack[j] = atoi(argv[j + 1]);
 		j++;
 	} 
-	// if(!check_dup(stack->stack, ac - 1)) return NULL;
 	if (check_dup(stack->stack,ac -1) == 1)
 	{
 		printf("no dup\n");
 	}else {
 		printf("there is dup\n");
-
+		exit(1);
 	}
 	return stack;
 }
 int main(int argc, char *argv[])
 {
-	// argv++;
-	// printf("%d\n", check_argv(argv));
-	// exit(1)
-;	t_stack *stack_a;
+	t_stack *stack_a;
 	if (argc < 2)
 		return (-1);
 	stack_a = fill_a(argc, argv);
 	if(stack_a == NULL)
 		return 1;
-	printf("%d\n", stack_a->stack[0]);
+	bable_sort(stack_a->stack, argc - 1);
+	int i = 0;
+	while (i < argc - 1)
+	{
+		printf("%d, ", stack_a->stack[i]);
+		i++;
+	}
+	
 	return 0;
 }
+
+// -------------------- testing -----------------------
+
+
+
+// int main(int argc, char const *argv[])
+// {
+// 	int arr[] = {1, 3 ,5 ,2 ,9, 6,4};
+// 	int *res = bable_sort(arr,7);
+// 	for (size_t i = 0; i < 7; i++)
+// 	{
+// 		printf("%d",res[i]);
+// 		if (i != 6)
+// 		{
+// 			printf(", ");
+// 		}
+// 	}
+// 	return 0;
+// }
