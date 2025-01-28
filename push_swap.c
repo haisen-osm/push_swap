@@ -140,7 +140,7 @@ char **joinArrEl(char **arr, char **split_arr)
 // Check if the arguments are valid numbers
 int isNumber(char **av)
 {
-    int i = 1;
+    int i = 0;
     int j = 0;
 
     while (av[i])
@@ -164,7 +164,6 @@ char **check_argv(char **av)
 {
     if (!av)
         return NULL;
-
     char **arr = NULL;
     int i = 1;
     while (av[i])
@@ -311,10 +310,10 @@ int main(int argc, char *argv[])
 
     // Step 4: Example usage
     print_stack(stack_a, "stack_a");
-    print_stack(stack_b, "stack_b");
+    // print_stack(stack_b, "stack_b");
 
-    pa(stack_a, stack_b);
-    print_stack(stack_a, "stack_a");
+    // pa(stack_a, stack_b);
+    // print_stack(stack_a, "stack_a");
 
 
     return 0;
